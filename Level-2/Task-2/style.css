@@ -1,0 +1,8 @@
+.image-section img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #2563eb;
+}
+
