@@ -4,20 +4,20 @@ const cors = require("cors");
 
 const app = express();
 
-// middlewares
+// middleware
 app.use(cors());
 app.use(express.json());
 
-// test route
-app.get("/", (req, res) => {
-  res.send("Pizza Delivery API is running 🚀");
-});
-
-// mongodb connection
+// MongoDB connection
 mongoose
   .connect("mongodb://127.0.0.1:27017/pizza-delivery")
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
+
+// routes
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/pizza", require("./routes/pizza"));
+app.use("/api/payment", require("./routes/payment")); 
 
 // server start
 const PORT = 5000;

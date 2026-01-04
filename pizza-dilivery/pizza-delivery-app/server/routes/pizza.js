@@ -1,12 +1,16 @@
 const express = require("express");
+const Pizza = require("../module/pizza");
+const auth = require("../middleware/auth");
+
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json([
-    { name: "Margherita", price: 199 },
-    { name: "Farmhouse", price: 299 },
-    { name: "Peppy Paneer", price: 349 }
-  ]);
+router.get("/", async (req, res) => {
+  res.json(await Pizza.find());
+});
+
+router.post("/custom", auth, async (req, res) => {
+  const pizza = await Pizza.create(req.body);
+  res.json(pizza);
 });
 
 module.exports = router;
